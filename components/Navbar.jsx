@@ -37,7 +37,7 @@ const Navbar = () => {
                     className="translate-icon"
                 >
                     <option className="text-black" value="en">EN</option>
-                    <option className="text-black" value="fr">PL</option>
+                    <option className="text-black" value="pl">PL</option>
                 </select>
             </div>
 
