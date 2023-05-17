@@ -83,6 +83,10 @@ span.text-red {
 
 }
 
+.nav-right-container {
+  display: flex;
+}
+
 .cart-icon {
   font-size: 25px;
   color: gray;
@@ -91,6 +95,19 @@ span.text-red {
   transition: transform .4s ease;
   border: none;
   background-color: transparent;
+  margin-right: 20px;
+}
+
+.translate-icon {
+  font-size: 15px;
+  color: gray;
+  cursor: pointer;
+  position: relative;
+  transition: transform .4s ease;
+  border: none;
+  background-color: transparent;
+  border-left: 2px solid #ccc;
+  padding-left: 10px;
 }
 
 .cart-icon:hover {

@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
 import { client, urlFor } from '../../lib/client';
 import { Product } from '../../components';
 import { useStateContext } from '../../context/StateContext';
 
+import en from '../../locales/en';
+import pl from '../../locales/pl';
+
 const ProductDetails = ({ product, products }) => {
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
   const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
+
+  const router = useRouter();
+  const { locale } = router;
+  const t = locale === 'en' ? en : pl;
 
   const handleBuyNow = () => {
     onAdd(product, qty);
@@ -49,11 +57,11 @@ const ProductDetails = ({ product, products }) => {
               (20)
             </p>
           </div>
-          <h4>Details: </h4>
+          <h4>{t.slugDetailsTitle} : </h4>
           <p>{details}</p>
-          <p className="price">${price}</p>
+          <p className="price">{price} zł</p>
           <div className="quantity">
-            <h3>Quantity:</h3>
+            <h3>{t.quantity} :</h3>
             <p className="quantity-desc">
               <span className="minus" onClick={decQty}><AiOutlineMinus /></span>
               <span className="num">{qty}</span>
@@ -61,14 +69,14 @@ const ProductDetails = ({ product, products }) => {
             </p>
           </div>
           <div className="buttons">
-            <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>Add to Cart</button>
-            <button type="button" className="buy-now" onClick={handleBuyNow}>Buy Now</button>
+            <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>{t.addCart}</button>
+            <button type="button" className="buy-now" onClick={handleBuyNow}>{t.buyNow}</button>
           </div>
         </div>
       </div>
 
       <div className="maylike-products-wrapper">
-          <h2>You may also like</h2>
+          <h2>{t.mayLike}</h2>
           <div className="marquee">
             <div className="maylike-products-container track">
               {products.map((item) => (
