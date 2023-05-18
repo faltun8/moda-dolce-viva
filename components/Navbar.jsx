@@ -36,8 +36,8 @@ const Navbar = () => {
                     defaultValue={locale}
                     className="translate-icon"
                 >
-                    <option className="text-black" value="en">EN</option>
-                    <option className="text-black" value="pl">PL</option>
+                    <option value="en">EN</option>
+                    <option value="pl">PL</option>
                 </select>
             </div>
 
