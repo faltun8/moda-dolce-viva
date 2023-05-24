@@ -36,9 +36,9 @@ const Cart = () => {
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
         <button
-        type="button"
-        className="cart-heading"
-        onClick={() => setShowCart(false)}>
+          type="button"
+          className="cart-heading"
+          onClick={() => setShowCart(false)}>
           <AiOutlineLeft />
           <span className="heading">Your Cart</span>
           <span className="cart-num-items">({totalQuantities} items)</span>
@@ -61,8 +61,8 @@ const Cart = () => {
         )}
 
         <div className="product-container">
-          {cartItems.length >= 1 && cartItems.map((item) => (
-            <div className="product" key={item._id}>
+          {cartItems.length >= 1 && cartItems.sort((a, b) => a.selectedSize > b.selectedSize ? 1 : -1).sort((a, b) => a._id > b._id ? 1 : -1).map((item) => (
+            <div className="product" >
               <img src={urlFor(item?.image[0])} className="cart-product-image" />
               <div className="item-desc">
                 <div className="flex top">
@@ -71,13 +71,13 @@ const Cart = () => {
                 </div>
                 <div className="flex bottom">
                   <div>
-                  <p className="quantity-desc">
-                    <span className="minus" onClick={() => toggleCartItemQuanitity(item._id, 'dec') }>
-                    <AiOutlineMinus />
-                    </span>
-                    <span className="num" onClick="">{item.quantity}</span>
-                    <span className="plus" onClick={() => toggleCartItemQuanitity(item._id, 'inc') }><AiOutlinePlus /></span>
-                  </p>
+                    <p className="quantity-desc">
+                      <span className="minus" onClick={() => toggleCartItemQuanitity(item._id, 'dec', item.selectedSize)}>
+                        <AiOutlineMinus />
+                      </span>
+                      <span className="num" onClick="">{item.quantity}</span>
+                      <span className="plus" onClick={() => toggleCartItemQuanitity(item._id, 'inc', item.selectedSize)}><AiOutlinePlus /></span>
+                    </p>
                   </div>
                   <button
                     type="button"
@@ -86,6 +86,10 @@ const Cart = () => {
                   >
                     <TiDeleteOutline />
                   </button>
+                </div>
+                <div className="flex-size">
+                  <p>Size :&nbsp;</p>
+                  <p>{item.selectedSize}</p>
                 </div>
               </div>
             </div>

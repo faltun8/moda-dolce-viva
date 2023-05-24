@@ -9,6 +9,9 @@ export default async function handler(req, res) {
         submit_type: 'pay',
         mode: 'payment',
         payment_method_types: ['card', 'blik'],
+        shipping_address_collection: {
+          allowed_countries: ["US", "CA", "KE", "PL"],
+        },
         billing_address_collection: 'auto',
         shipping_options: [
           //fast shipping
@@ -25,7 +28,11 @@ export default async function handler(req, res) {
               currency: 'pln',
               product_data: { 
                 name: item.name,
+                description: `Size: ${item.selectedSize}`,
                 images: [newImage],
+                metadata: {
+                  test: item._id,
+                },
               },
               unit_amount: item.price * 100,
             },

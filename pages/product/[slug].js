@@ -13,13 +13,18 @@ const ProductDetails = ({ product, products }) => {
   const { image, name, details, price } = product;
   const [index, setIndex] = useState(0);
   const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
+  const [selectedSize, setSelectedSize] = useState('S');
+
+  const handleSizeChange = (event) => {
+    setSelectedSize(event.target.value);
+  };
 
   const router = useRouter();
   const { locale } = router;
   const t = locale === 'en' ? en : pl;
 
   const handleBuyNow = () => {
-    onAdd(product, qty);
+    onAdd(product, qty, selectedSize);
 
     setShowCart(true);
   }
@@ -68,8 +73,19 @@ const ProductDetails = ({ product, products }) => {
               <span className="plus" onClick={incQty}><AiOutlinePlus /></span>
             </p>
           </div>
+
+          <div className="quantity">
+          <h3>Select Size :</h3>
+            <select className="quantity-desc" id="size" value={selectedSize} onChange={handleSizeChange}>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </div>
+          
           <div className="buttons">
-            <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>{t.addCart}</button>
+            <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty, selectedSize)}>{t.addCart}</button>
             <button type="button" className="buy-now" onClick={handleBuyNow}>{t.buyNow}</button>
           </div>
         </div>

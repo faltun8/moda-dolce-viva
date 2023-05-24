@@ -13,23 +13,30 @@ export const StateContext = ({ children }) => {
   let foundProduct;
   let index;
 
-  const onAdd = (product, quantity) => {
-    const checkProductInCart = cartItems.find((item) => item._id === product._id);
+  const onAdd = (product, quantity, selectedSize) => {
+    const checkProductInCartWithSameSize = cartItems.find((item) => item._id === product._id && item.selectedSize === selectedSize);
     
     setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity);
     setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
     
-    if(checkProductInCart) {
+    if(checkProductInCartWithSameSize) {
       const updatedCartItems = cartItems.map((cartProduct) => {
-        if(cartProduct._id === product._id) return {
-          ...cartProduct,
-          quantity: cartProduct.quantity + quantity
+        if(cartProduct._id === product._id && cartProduct.selectedSize === selectedSize) {
+          return {
+            ...cartProduct,
+            quantity: cartProduct.quantity + quantity
+          }
+        } else {
+          return {
+            ...cartProduct,
+          }
         }
-      })
+      })      
 
       setCartItems(updatedCartItems);
     } else {
       product.quantity = quantity;
+      product.selectedSize = selectedSize; 
       
       setCartItems([...cartItems, { ...product }]);
     }
@@ -46,10 +53,10 @@ export const StateContext = ({ children }) => {
     setCartItems(newCartItems);
   }
 
-  const toggleCartItemQuanitity = (id, value) => {
-    foundProduct = cartItems.find((item) => item._id === id)
-    index = cartItems.findIndex((product) => product._id === id);
-    const newCartItems = cartItems.filter((item) => item._id !== id)
+  const toggleCartItemQuanitity = (id, value, selectedSize) => {
+    foundProduct = cartItems.find((item) => item._id === id && item.selectedSize === selectedSize)
+    index = cartItems.findIndex((product) => product._id === id && product.selectedSize === selectedSize);
+    const newCartItems = cartItems.filter((item) => !(item._id === id && item.selectedSize === selectedSize))
 
     if(value === 'inc') {
       setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity + 1 } ]);

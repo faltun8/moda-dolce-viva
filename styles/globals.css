@@ -430,6 +430,12 @@ span.text-red {
 
 }
 
+.item-desc .flex-size {
+  display: flex;
+  margin-top: 10px;
+  color: #324d67;
+}
+
 .item-desc .bottom {
   margin-top: 60px;
 }
