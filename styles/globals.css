@@ -639,12 +639,12 @@ span.text-red {
 }
 
 .quantity-desc .minus {
-  border-right: 1px solid gray;
   color: #f02d34;
 }
 
 .quantity-desc .num {
   border-right: 1px solid gray;
+  border-left: 1px solid gray;
   font-size: 20px;
 }
 
