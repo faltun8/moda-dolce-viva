@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { BsBagCheckFill } from 'react-icons/bs';
 
 import { useStateContext } from '../context/StateContext';
 import { runFireworks } from '../lib/utils';
+
+import en from '../locales/en';
+import pl from '../locales/pl';
 
 const Success = () => {
   const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
@@ -16,23 +20,27 @@ const Success = () => {
     runFireworks();
   }, []);
 
+  const router = useRouter();
+  const { locale } = router;
+  const t = locale === 'en' ? en : pl;
+
   return (
     <div className="success-wrapper">
       <div className="success">
         <p className="icon">
           <BsBagCheckFill />
         </p>
-        <h2>Thank you for your order!</h2>
-        <p className="email-msg">Check your email inbox for the receipt.</p>
+        <h2>{t.thankYou}</h2>
+        <p className="email-msg">{t.checkEmail}</p>
         <p className="description">
-          If you have any questions, please email
+          {t.anyQuestion}
           <a className="email" href="mailto:order@example.com">
             order@example.com
           </a>
         </p>
         <Link href="/">
           <button type="button" width="300px" className="btn">
-            Continue Shopping
+            {t.continueShopping}
           </button>
         </Link>
       </div>

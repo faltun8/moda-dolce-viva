@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import Link from 'next/link';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
+import { useRouter } from 'next/router';
 import { TiDeleteOutline } from 'react-icons/ti';
 import toast from 'react-hot-toast';
 
@@ -8,9 +9,15 @@ import { useStateContext } from '../context/StateContext';
 import { urlFor } from '../lib/client';
 import getStripe from '../lib/getStripe';
 
+import en from '../locales/en';
+import pl from '../locales/pl';
+
 const Cart = () => {
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
+  const router = useRouter();
+  const { locale } = router;
+  const t = locale === 'en' ? en : pl;
 
   const handleCheckout = async () => {
     const stripe = await getStripe();
@@ -23,8 +30,8 @@ const Cart = () => {
       body: JSON.stringify(cartItems),
     });
 
-    if(response.statusCode === 500) return;
-    
+    if (response.statusCode === 500) return;
+
     const data = await response.json();
 
     toast.loading('Redirecting...');
@@ -40,21 +47,26 @@ const Cart = () => {
           className="cart-heading"
           onClick={() => setShowCart(false)}>
           <AiOutlineLeft />
-          <span className="heading">Your Cart</span>
-          <span className="cart-num-items">({totalQuantities} items)</span>
+          <span className="heading">{t.yourCart}</span>
+          <span className="cart-num-items">({totalQuantities}&nbsp;
+            {totalQuantities < 2 ? (
+              t.item
+            ) : (
+              t.items
+            )})</span>
         </button>
 
         {cartItems.length < 1 && (
           <div className="empty-cart">
             <AiOutlineShopping size={150} />
-            <h3>Your shopping bag is empty</h3>
+            <h3>{t.emptycart}</h3>
             <Link href="/">
               <button
                 type="button"
                 onClick={() => setShowCart(false)}
                 className="btn"
               >
-                Continue Shopping
+                {t.continueShopping}
               </button>
             </Link>
           </div>
@@ -67,7 +79,7 @@ const Cart = () => {
               <div className="item-desc">
                 <div className="flex top">
                   <h5>{item.name}</h5>
-                  <p>{item.quantity} x ${item.price} = <strong>${item.quantity * item.price}</strong></p>
+                  <p>{item.quantity} x zł{item.price} = <strong>zł{item.quantity * item.price}</strong></p>
                 </div>
                 <div className="flex bottom">
                   <div>
@@ -88,7 +100,7 @@ const Cart = () => {
                   </button>
                 </div>
                 <div className="flex-size">
-                  <p>Size :&nbsp;</p>
+                  <p>{t.size} :&nbsp;</p>
                   <p>{item.selectedSize}</p>
                 </div>
               </div>
@@ -98,12 +110,12 @@ const Cart = () => {
         {cartItems.length >= 1 && (
           <div className="cart-bottom">
             <div className="total">
-              <h3>Subtotal:</h3>
-              <h3>${totalPrice}</h3>
+              <h3>{t.subtotal}:</h3>
+              <h3>zł{totalPrice}</h3>
             </div>
             <div className="btn-container">
               <button type="button" className="btn" onClick={handleCheckout}>
-                Pay with Stripe
+                {t.checkout}
               </button>
             </div>
           </div>

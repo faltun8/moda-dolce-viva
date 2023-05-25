@@ -7,5 +7,17 @@ export default {
     buyNow: 'Kup Teraz',
     slugDetailsTitle: 'Detale',
     mayLike: 'Może Ci się spodobać',
-
+    yourCart: 'Twój wózek',
+    emptycart: 'Twoja torba na zakupy jest pusta',
+    continueShopping: 'Kontynuować zakupy',
+    size: 'Rozmiar',
+    subtotal: 'Suma Częściowa',
+    checkout: 'zapłacić',
+    item: 'przedmiot',
+    items: 'itpozycjeems',
+    description: 'Opis',
+    thankYou: 'Dziękuję za Twoje zamówienie!',
+    checkEmail: 'CSprawdź swoją skrzynkę e-mail, aby otrzymać potwierdzenie.',
+    anyQuestion: 'W razie pytań proszę o e-mail',
+    continueShopping: 'Kontynuować zakupy'
 };

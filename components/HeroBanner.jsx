@@ -1,9 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 
 import { urlFor } from '../lib/client';
 
+import en from '../locales/en';
+import pl from '../locales/pl';
+
 const HeroBanner = ({ heroBanner }) => {
+  const router = useRouter();
+  const { locale } = router;
+  const t = locale === 'en' ? en : pl;
   return (
     <div className="hero-banner-container">
       <div>
@@ -17,7 +25,7 @@ const HeroBanner = ({ heroBanner }) => {
             <button type="button">{heroBanner.buttonText}</button>
           </Link>
           <div className="desc">
-            <h5>Description</h5>
+            <h5>{t.description}</h5>
             <p>{heroBanner.desc}</p>
           </div>
         </div>

@@ -7,4 +7,17 @@ export default {
     buyNow: 'Buy Now',
     slugDetailsTitle: 'Detils',
     mayLike: 'You may also like',
+    yourCart: 'Your Cart',
+    emptycart: 'Your shopping bag is empty',
+    continueShopping: 'Continue Shopping',
+    size: 'Size',
+    subtotal: 'Subtotal',
+    checkout: 'Checkout',
+    item: 'item',
+    items: 'items',
+    description: 'Description',
+    thankYou: 'Thank you for your order!',
+    checkEmail: 'Check your email inbox for the receipt.',
+    anyQuestion: 'If you have any questions, please email',
+    continueShopping: 'Continue Shopping'
 };
