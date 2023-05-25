@@ -75,7 +75,7 @@ const ProductDetails = ({ product, products }) => {
           </div>
 
           <div className="quantity">
-          <h3>Select Size :</h3>
+          <h3>{t.selectSize} :</h3>
             <select className="quantity-desc" id="size" value={selectedSize} onChange={handleSizeChange}>
               <option value="S">S</option>
               <option value="M">M</option>

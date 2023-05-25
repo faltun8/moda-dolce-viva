@@ -19,5 +19,6 @@ export default {
     thankYou: 'Dziękuję za Twoje zamówienie!',
     checkEmail: 'CSprawdź swoją skrzynkę e-mail, aby otrzymać potwierdzenie.',
     anyQuestion: 'W razie pytań proszę o e-mail',
-    continueShopping: 'Kontynuować zakupy'
+    continueShopping: 'Kontynuować zakupy',
+    selectSize: 'Wybierz rozmiar'
 };
