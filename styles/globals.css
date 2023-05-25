@@ -416,7 +416,7 @@ span.text-red {
 }
 
 .product .cart-product-image {
-  width: 180px;
+  min-width: 145px;
   height: 150px;
   border-radius: 15px;
   background-color: #ebebeb;
