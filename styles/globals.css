@@ -451,6 +451,9 @@ span.text-red {
 .total {
   display: flex;
   justify-content: space-between;
+  background-color: rgba(235, 235, 235, 0.8);
+  padding: 10px 25px;
+  border-radius: 15px;
 }
 
 .total h3 {
@@ -569,6 +572,10 @@ span.text-red {
   font-size: 26px;
   margin-top: 30px;
   color: #f02d34;
+}
+
+.product-price-no-discount {
+  display: none;
 }
 
 .price .old-price,

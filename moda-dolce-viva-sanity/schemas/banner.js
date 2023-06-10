@@ -49,7 +49,7 @@ export default {
         {
             name: 'discount',
             title: 'Discount',
-            type: 'string',
+            type: 'number',
         },
         {
             name: 'saleTime',

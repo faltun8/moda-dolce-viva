@@ -34,7 +34,7 @@ export default async function handler(req, res) {
                   test: item._id,
                 },
               },
-              unit_amount: item.price * 100,
+              unit_amount: (item.discount ? (item.price - item.price * item.discount / 100) : item.price) * 100,
             },
             adjustable_quantity: {
               enabled:true,

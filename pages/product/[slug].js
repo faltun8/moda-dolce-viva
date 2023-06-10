@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
@@ -10,13 +10,14 @@ import en from '../../locales/en';
 import pl from '../../locales/pl';
 
 const ProductDetails = ({ product, products }) => {
-  const { image, name, details, price } = product;
+  const { image, name, details, price, discount } = product;
   const [index, setIndex] = useState(0);
-  const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
+  const { decQty, incQty, qty, setQty, onAdd, setShowCart } = useStateContext();
   const [selectedSize, setSelectedSize] = useState('S');
 
   const handleSizeChange = (event) => {
     setSelectedSize(event.target.value);
+    setQty(1)
   };
 
   const router = useRouter();
@@ -28,6 +29,10 @@ const ProductDetails = ({ product, products }) => {
 
     setShowCart(true);
   }
+
+  useEffect(() => {
+   setQty(1)
+  }, []);
 
   return (
     <div>
@@ -64,7 +69,11 @@ const ProductDetails = ({ product, products }) => {
           </div>
           <h4>{t.slugDetailsTitle} : </h4>
           <p>{details}</p>
-          <p className="price">{price} zł</p>
+          <p className='price'>
+            {/* TO DO: wide discount mean discount to be applied all of the products.  */}
+            <span className={`${discount ? 'old-price' : 'product-price'}`}>zł{price}</span>
+            <span className={`${discount ? 'price product-price' : 'product-price-no-discount'}`}>&nbsp;zł{discount && price - price * discount / 100}</span>
+          </p>
           <div className="quantity">
             <h3>{t.quantity} :</h3>
             <p className="quantity-desc">
@@ -133,8 +142,6 @@ export const getStaticProps = async ({ params: { slug }}) => {
   
   const product = await client.fetch(query);
   const products = await client.fetch(productsQuery);
-
-  console.log(product);
 
   return {
     props: { products, product }

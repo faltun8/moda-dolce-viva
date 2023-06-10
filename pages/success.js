@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { BsBagCheckFill } from 'react-icons/bs';
+import { useCookies } from "react-cookie"
+
 
 import { useStateContext } from '../context/StateContext';
 import { runFireworks } from '../lib/utils';
@@ -10,11 +12,13 @@ import en from '../locales/en';
 import pl from '../locales/pl';
 
 const Success = () => {
-  const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
+  const { setCartItems, setTotalPrice, setTotalQuantities, handleCookieUpdate } = useStateContext();
+  const [cookies, setCookie, removeCookie] = useCookies(["cart"])
   
   useEffect(() => {
     localStorage.clear();
-    setCartItems([]);
+    removeCookie('CartItems')
+    handleCookieUpdate([]);
     setTotalPrice(0);
     setTotalQuantities(0);
     runFireworks();

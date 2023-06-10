@@ -79,7 +79,12 @@ const Cart = () => {
               <div className="item-desc">
                 <div className="flex top">
                   <h5>{item.name}</h5>
-                  <p>{item.quantity} x zł{item.price} = <strong>zł{item.quantity * item.price}</strong></p>
+                  <p className='price'>{item.quantity} x&nbsp;
+                    {/* TO DO: wide discount mean discount to be applied all of the products.  */}
+                    <span className={`${item.discount ? 'product-price' : 'product-price-no-discount'}`}>&nbsp;zł{item.discount ? item.price - item.price * item.discount / 100 : item.price}</span>
+                    <span className={`${item.discount ? 'old-price' : 'product-price'}`}>&nbsp;zł{item.price}</span>
+                  </p>
+                  {/* <p>{item.quantity} x zł{item.price} = <strong>zł{item.quantity * item.price}</strong></p> */}
                 </div>
                 <div className="flex bottom">
                   <div>
