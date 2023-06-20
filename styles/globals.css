@@ -456,6 +456,25 @@ span.text-red {
   border-radius: 15px;
 }
 
+.promo {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(235, 235, 235, 0.8);
+  padding: 10px 25px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.promo-applied {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(235, 235, 235, 0.8);
+  padding: 10px 25px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+
 .total h3 {
   font-size: 22px;
 
@@ -583,6 +602,7 @@ span.text-red {
 .price .old-price {
   color: gray;
   text-decoration: line-through;
+  margin-right: 3px;
 }
 
 .product-detail-desc .quantity {
@@ -746,6 +766,32 @@ span.text-red {
   margin-top: 10px;
 }
 
+.promo-input {
+  padding: 10px;
+  border: 1px solid rgba(204, 204, 204, 0);
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+.promo-input:focus {
+  border-color: #f02d34;
+}
+
+.promo-submit {
+  padding: 10px 20px;
+  background-color: #f02d34;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.promo-submit:hover {
+  background-color: #f02d34;
+}
+
 @media screen and (max-width:800px) {
   .hero-banner-container {
     height: 560px;
@@ -896,6 +942,10 @@ span.text-red {
   }
 
   .total h3 {
+    font-size: 20px;
+  }
+
+  .promo h3 {
     font-size: 20px;
   }
 

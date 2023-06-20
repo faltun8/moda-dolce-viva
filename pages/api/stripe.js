@@ -19,10 +19,13 @@ export default async function handler(req, res) {
           //standart shipping
           { shipping_rate: 'shr_1N8zlcBlsnK2mHDJmu3cgESs' },
         ],
-        line_items: req.body.map((item) => {
+        line_items: req.body.cartItems.map((item) => {
           const img = item.image[0].asset._ref;
           const newImage = img.replace('image-', 'https://cdn.sanity.io/images/y9ligf3f/production/').replace('-webp', '.webp');
-
+          let finalPrice = ((item.discount ? (item.price - item.price * item.discount / 100) : item.price) * 100)
+          if (req.body.promoCodeSale !== 100) {
+            finalPrice = finalPrice - finalPrice * req.body.promoCodeSale /100
+          } 
           return {
             price_data: { 
               currency: 'pln',
@@ -34,7 +37,7 @@ export default async function handler(req, res) {
                   test: item._id,
                 },
               },
-              unit_amount: (item.discount ? (item.price - item.price * item.discount / 100) : item.price) * 100,
+              unit_amount: finalPrice,
             },
             adjustable_quantity: {
               enabled:true,
