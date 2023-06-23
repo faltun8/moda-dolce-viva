@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { useRouter } from 'next/router';
@@ -14,54 +14,30 @@ import pl from '../locales/pl';
 
 const Cart = () => {
   const cartRef = useRef();
-  const [promoCode, setPromoCode] = useState('');
-  const [promoCodeSale, setPromoCodeSale] = useState(100);
-  const [oldTotalPrice, setOldTotalPrice] = useState(0);
-  const { totalPrice, setTotalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
+  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
   const router = useRouter();
   const { locale } = router;
   const t = locale === 'en' ? en : pl;
-  const predefinedPromoCodes = ['MODADOLCE-15', 'MODADOLCE25', 'MODADOLCE_35', 'MODADOLCEVIVA-15', 'MODADOLCEVIVA25', 'MODADOLCEVIVA_35', 'SUMMERSALE-15', 'SUMMERSALE25', 'SUMMERSALE_35'];
 
   const handleCheckout = async () => {
     const stripe = await getStripe();
-  
-    const requestBody = {
-      cartItems: cartItems,
-      promoCodeSale: promoCodeSale,
-    };
-  
+
     const response = await fetch('/api/stripe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify(cartItems),
     });
-  
-    if (response.status === 500) return;
-  
+
+    if (response.statusCode === 500) return;
+
     const data = await response.json();
-  
+
     toast.loading('Redirecting...');
-  
+
     stripe.redirectToCheckout({ sessionId: data.id });
-  };
-
-
-  const handleInputChange = (event) => {
-    setPromoCode(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Perform any logic or actions with the promoCode value here
-    if (predefinedPromoCodes.includes(promoCode)) {
-      setPromoCodeSale(parseInt(promoCode.slice(-2), 10));
-      setOldTotalPrice(totalPrice);
-      setTotalPrice(totalPrice - (totalPrice * parseInt(promoCode.slice(-2), 10) / 100));
-    }
-  };
+  }
 
   return (
     <div className="cart-wrapper" ref={cartRef}>
@@ -138,29 +114,9 @@ const Cart = () => {
         </div>
         {cartItems.length >= 1 && (
           <div className="cart-bottom">
-            {promoCodeSale !== 100 ? (
-              <div className="promo-applied">
-                <p>%{promoCodeSale} discount has been applied with your promo code</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="promo">
-                <input
-                  type="text"
-                  className="promo-input"
-                  placeholder="Enter promo code"
-                  value={promoCode}
-                  onChange={handleInputChange}
-                />
-                <input type="submit" className="promo-submit" value="Apply" />
-              </form>
-            )}
-
             <div className="total">
               <h3>{t.subtotal}:</h3>
-              <p className='price'>
-                <span className={`${promoCodeSale !== 100 ? 'old-price' : 'product-price'}`}>zł{promoCodeSale == 100 ? totalPrice : oldTotalPrice}</span>
-                <span className={`${promoCodeSale !== 100 ? 'product-price' : 'product-price-no-discount'}`}>&nbsp;zł{totalPrice}</span>
-              </p>
+              <h3>zł{totalPrice}</h3>
             </div>
             <div className="btn-container">
               <button type="button" className="btn" onClick={handleCheckout}>
