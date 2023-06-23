@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { useRouter } from 'next/router';
@@ -17,9 +17,7 @@ const Cart = () => {
   const [promoCode, setPromoCode] = useState('');
   const [promoCodeSale, setPromoCodeSale] = useState(100);
   const [oldTotalPrice, setOldTotalPrice] = useState(0);
-  const [invalidPromo, setInvalidPromo] = useState(false);
   const { totalPrice, setTotalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
-  const [newTotalPrice, setNewTotalPrice] = useState(totalPrice);
   const router = useRouter();
   const { locale } = router;
   const t = locale === 'en' ? en : pl;
@@ -27,12 +25,12 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     const stripe = await getStripe();
-
+  
     const requestBody = {
       cartItems: cartItems,
       promoCodeSale: promoCodeSale,
     };
-
+  
     const response = await fetch('/api/stripe', {
       method: 'POST',
       headers: {
@@ -40,13 +38,13 @@ const Cart = () => {
       },
       body: JSON.stringify(requestBody),
     });
-
+  
     if (response.status === 500) return;
-
+  
     const data = await response.json();
-
+  
     toast.loading('Redirecting...');
-
+  
     stripe.redirectToCheckout({ sessionId: data.id });
   };
 
@@ -57,37 +55,13 @@ const Cart = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // Perform any logic or actions with the promoCode value here
     if (predefinedPromoCodes.includes(promoCode)) {
-      const sumOld = cartItems.reduce((sum, item) => sum + (item.quantity * item.price), 0)
       setPromoCodeSale(parseInt(promoCode.slice(-2), 10));
-      setOldTotalPrice(sumOld);
-      setNewTotalPrice(totalPrice - (totalPrice * parseInt(promoCode.slice(-2), 10) / 100));
-      setInvalidPromo(false)
-    } else {
-      setInvalidPromo(true)
+      setOldTotalPrice(totalPrice);
+      setTotalPrice(totalPrice - (totalPrice * parseInt(promoCode.slice(-2), 10) / 100));
     }
   };
-
-
-  useEffect(() => {
-    if (predefinedPromoCodes.includes(promoCode)) {
-      const sumOld = cartItems.reduce((sum, item) => sum + (item.quantity * item.price), 0)
-      setOldTotalPrice(sumOld);
-      setNewTotalPrice(totalPrice);
-    }
-  }, [promoCode]);
-
-  useEffect(() => {
-    const sumOld = cartItems.reduce((sum, item) => sum + (item.quantity * item.price), 0)
-    setOldTotalPrice(sumOld);
-    if (predefinedPromoCodes.includes(promoCode))  {
-      setNewTotalPrice(totalPrice - (totalPrice * parseInt(promoCode.slice(-2), 10) / 100));
-    } else {
-      setNewTotalPrice(totalPrice);
-    }
-
-  }, [totalPrice]);
-
 
   return (
     <div className="cart-wrapper" ref={cartRef}>
@@ -170,28 +144,22 @@ const Cart = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="promo">
-                <div className="promo-container">
-                  <input
-                    type="text"
-                    className="promo-input"
-                    placeholder="Enter promo code"
-                    value={promoCode}
-                    onChange={handleInputChange}
-                  />
-                  <input type="submit" className="promo-submit" value="Apply" />
-                </div>
-
-                {invalidPromo && (
-                  <p className="promo-invalid">Sorry! Invalid Promo Code :(</p>
-                )}
+                <input
+                  type="text"
+                  className="promo-input"
+                  placeholder="Enter promo code"
+                  value={promoCode}
+                  onChange={handleInputChange}
+                />
+                <input type="submit" className="promo-submit" value="Apply" />
               </form>
             )}
 
             <div className="total">
               <h3>{t.subtotal}:</h3>
               <p className='price'>
-                <span className={`${oldTotalPrice !== newTotalPrice ? 'old-price' : 'product-price'}`}>zł{oldTotalPrice == newTotalPrice ? newTotalPrice.toFixed(2) : oldTotalPrice.toFixed(2)}</span>
-                <span className={`${oldTotalPrice !== newTotalPrice ? 'product-price' : 'product-price-no-discount'}`}>&nbsp;zł{newTotalPrice.toFixed(2)}</span>
+                <span className={`${promoCodeSale !== 100 ? 'old-price' : 'product-price'}`}>zł{promoCodeSale == 100 ? totalPrice : oldTotalPrice}</span>
+                <span className={`${promoCodeSale !== 100 ? 'product-price' : 'product-price-no-discount'}`}>&nbsp;zł{totalPrice}</span>
               </p>
             </div>
             <div className="btn-container">

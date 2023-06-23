@@ -456,19 +456,13 @@ span.text-red {
   border-radius: 15px;
 }
 
-.promo-container {
-  display: flex;
-  justify-content: space-between;
-}
-
 .promo {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   background-color: rgba(235, 235, 235, 0.8);
   padding: 10px 25px;
   border-radius: 15px;
   margin-bottom: 20px;
-  color: #324d67;
 }
 
 .promo-applied {
@@ -479,10 +473,6 @@ span.text-red {
   border-radius: 15px;
   margin-bottom: 20px;
   font-size: 12px;
-}
-
-.promo-invalid {
-  margin-top: 10px;
 }
 
 .total h3 {
