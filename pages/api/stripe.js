@@ -9,7 +9,7 @@ export default async function handler(req, res) {
         submit_type: 'pay',
         mode: 'payment',
         allow_promotion_codes: true,
-        payment_method_types: ['card', 'blik'],
+        payment_method_types: ['card', 'blik', 'p24'],
         shipping_address_collection: {
           allowed_countries: ["US", "CA", "KE", "PL"],
         },

@@ -13,7 +13,8 @@ const ProductDetails = ({ product, products }) => {
   const { image, name, details, price, discount } = product;
   const [index, setIndex] = useState(0);
   const { decQty, incQty, qty, setQty, onAdd, setShowCart } = useStateContext();
-  const [selectedSize, setSelectedSize] = useState('S');
+  const [selectedSize, setSelectedSize] = useState('');
+  const [availableOptions, setAvailableOptions] = useState({});
 
   const handleSizeChange = (event) => {
     setSelectedSize(event.target.value);
@@ -31,7 +32,8 @@ const ProductDetails = ({ product, products }) => {
   }
 
   useEffect(() => {
-   setQty(1)
+    setQty(1)
+    setAvailableOptions(product.stockInfo);
   }, []);
 
   return (
@@ -43,7 +45,7 @@ const ProductDetails = ({ product, products }) => {
           </div>
           <div className="small-images-container">
             {image?.map((item, i) => (
-              <img 
+              <img
                 key={i}
                 src={urlFor(item)}
                 className={i === index ? 'small-image selected-image' : 'small-image'}
@@ -79,36 +81,50 @@ const ProductDetails = ({ product, products }) => {
             <p className="quantity-desc">
               <span className="minus" onClick={decQty}><AiOutlineMinus /></span>
               <span className="num">{qty}</span>
-              <span className="plus" onClick={incQty}><AiOutlinePlus /></span>
+              <span className="plus" onClick={availableOptions[selectedSize] > qty ? incQty : undefined}><AiOutlinePlus /></span>
             </p>
           </div>
 
           <div className="quantity">
-          <h3>{t.selectSize} :</h3>
+            <h3>{t.selectSize} :</h3>
             <select className="quantity-desc" id="size" value={selectedSize} onChange={handleSizeChange}>
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-              <option value="XL">XL</option>
+              <option value="" disabled>Select Size</option>
+              <option value="S" disabled={!availableOptions['S'] || availableOptions['S'] < qty}>S</option>
+              <option value="M" disabled={!availableOptions['M'] || availableOptions['M'] < qty}>M</option>
+              <option value="L" disabled={!availableOptions['L'] || availableOptions['L'] < qty}>L</option>
+              <option value="XL" disabled={!availableOptions['XL'] || availableOptions['XL'] < qty}>XL</option>
             </select>
           </div>
-          
+
           <div className="buttons">
-            <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty, selectedSize)}>{t.addCart}</button>
-            <button type="button" className="buy-now" onClick={handleBuyNow}>{t.buyNow}</button>
+            <button
+              type="button"
+              className={`${!selectedSize ? 'disabled-button' : 'add-to-cart'}`}
+              onClick={() => {
+                if (selectedSize) {
+                  onAdd(product, qty, selectedSize);
+                }
+              }}
+              disabled={!selectedSize}
+            >
+              {t.addCart}
+            </button>
+            <button type="button" className={`${!selectedSize ? 'disabled-button' : 'buy-now'}`} onClick={handleBuyNow} disabled={!selectedSize}>
+              {t.buyNow}
+            </button>
           </div>
         </div>
       </div>
 
       <div className="maylike-products-wrapper">
-          <h2>{t.mayLike}</h2>
-          <div className="marquee">
-            <div className="maylike-products-container track">
-              {products.map((item) => (
-                <Product key={item._id} product={item} />
-              ))}
-            </div>
+        <h2>{t.mayLike}</h2>
+        <div className="marquee">
+          <div className="maylike-products-container track">
+            {products.map((item) => (
+              <Product key={item._id} product={item} />
+            ))}
           </div>
+        </div>
       </div>
     </div>
   )
@@ -125,7 +141,7 @@ export const getStaticPaths = async () => {
   const products = await client.fetch(query);
 
   const paths = products.map((product) => ({
-    params: { 
+    params: {
       slug: product.slug.current
     }
   }));
@@ -136,10 +152,10 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({ params: { slug }}) => {
+export const getStaticProps = async ({ params: { slug } }) => {
   const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
   const productsQuery = '*[_type == "product"]'
-  
+
   const product = await client.fetch(query);
   const products = await client.fetch(productsQuery);
 

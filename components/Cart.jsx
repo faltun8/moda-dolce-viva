@@ -16,6 +16,7 @@ const Cart = () => {
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
   const router = useRouter();
+  
   const { locale } = router;
   const t = locale === 'en' ? en : pl;
 
@@ -93,7 +94,7 @@ const Cart = () => {
                         <AiOutlineMinus />
                       </span>
                       <span className="num" onClick="">{item.quantity}</span>
-                      <span className="plus" onClick={() => toggleCartItemQuanitity(item._id, 'inc', item.selectedSize)}><AiOutlinePlus /></span>
+                      <span className="plus" onClick={() => item.stockInfo[item.selectedSize] > item.quantity ? toggleCartItemQuanitity(item._id, 'inc', item.selectedSize) : undefined}><AiOutlinePlus /></span>
                     </p>
                   </div>
                   <button
