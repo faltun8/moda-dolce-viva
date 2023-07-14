@@ -1,6 +1,8 @@
 export default {
     heroTitle: 'Best Seller Product',
     heroDesc: 'Here you can find our best selling products',
+    allProductTitle: 'All Products',
+    allProductDesc: 'Here you can find our other products',
     rights: '2023 Dolce Viva Moda All rights reserverd',
     quantity: 'Quantity',
     addCart: 'Add to Cart',
