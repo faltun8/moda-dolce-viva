@@ -47,6 +47,12 @@ export default {
       type: 'number',
     },
     {
+      name: 'isHighlighted',
+      title: 'Is Highlighted?',
+      type: 'boolean',
+      initialValue: false,
+    },
+    {
       title: "Stock info",
       name: "stockInfo",
       type: "document",

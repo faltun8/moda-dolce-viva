@@ -88,7 +88,7 @@ const ProductDetails = ({ product, products }) => {
           <div className="quantity">
             <h3>{t.selectSize} :</h3>
             <select className="quantity-desc" id="size" value={selectedSize} onChange={handleSizeChange}>
-              <option value="" disabled>Select Size</option>
+              <option value="" disabled>{t.selectSize}</option>
               <option value="S" disabled={!availableOptions['S'] || availableOptions['S'] < qty}>S</option>
               <option value="M" disabled={!availableOptions['M'] || availableOptions['M'] < qty}>M</option>
               <option value="L" disabled={!availableOptions['L'] || availableOptions['L'] < qty}>L</option>

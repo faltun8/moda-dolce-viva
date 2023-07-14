@@ -15,18 +15,45 @@ const Home = ({ products, bannerData }) => {
 
   return (
     <div>
-    <HeroBanner heroBanner={bannerData.length && bannerData[0]}  />
-    <div className="products-heading">
-      <h2>{t.heroTitle}</h2>
-      <p>{t.heroDesc}</p>
-    </div>
+      <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
+      
+      {/* Highlighted products */}
+      <div className="products-heading">
+        <h2>{t.heroTitle}</h2>
+        <p>{t.heroDesc}</p>
+      </div>
+      <div className="products-container">
+        {console.log('products :', products)}
+        {products
+          ?.filter((product) => product.isHighlighted === true)
+          .map((product) => (
+            <Product
+              key={product._id}
+              product={product}
+              wideDiscount={bannerData.length && bannerData[0].discount}
+            />
+          ))}
+      </div>
 
-    <div className="products-container">
-      {products?.map((product) => <Product key={product._id} product={product} wideDiscount={bannerData.length && bannerData[0].discount} />)}
-    </div>
+      {/* Not Highlighted products */}
+      <div className="products-heading">
+        <h2>{t.allProductTitle}</h2>
+        <p>{t.allProductDesc}</p>
+      </div>
+      <div className="products-container">
+      {products
+          ?.filter((product) => product.isHighlighted === false)
+          .map((product) => (
+            <Product
+              key={product._id}
+              product={product}
+              wideDiscount={bannerData.length && bannerData[0].discount}
+            />
+          ))}
+      </div>
 
-    <FooterBanner footerBanner={bannerData && bannerData[0]} />
-  </div>
+      <FooterBanner footerBanner={bannerData && bannerData[0]} />
+    </div>
   )
 }
 
