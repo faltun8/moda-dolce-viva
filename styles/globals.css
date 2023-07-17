@@ -262,11 +262,10 @@ span.text-red {
 }
 
 .footer-banner-container {
-  padding: 100px 40px;
+  padding: 50px 40px;
   background-color: #f02d34;
   border-radius: 15px;
   position: relative;
-  height: 400px;
   line-height: 1;
   color: white;
   width: 100%;
@@ -276,6 +275,7 @@ span.text-red {
 .banner-desc {
   display: flex;
   justify-content: space-between;
+  color: #ebebeb;
 }
 
 .banner-desc button {
@@ -297,7 +297,7 @@ span.text-red {
 }
 
 .banner-desc .left p {
-  margin: 18px;
+  font-size: 18px;
 }
 
 .footer-banner-image {
@@ -312,6 +312,9 @@ span.text-red {
 
 .banner-desc .right {
   line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .banner-desc .right h3 {
@@ -320,12 +323,19 @@ span.text-red {
 }
 
 .banner-desc .right p {
-  font-size: 18px;
+  font-weight: 250;
 }
 
 .banner-desc .right .company-desc {
   font-size: 14px;
   font-weight: 300;
+}
+
+.banner-desc .right h1 {
+  font-weight: lighter;
+  font-size: xx-large;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
 }
 
 .cart-wrapper {
@@ -350,7 +360,7 @@ span.text-red {
 
 }
 
-.footer-container {
+.rights-container{
   color: #324d67;
   text-align: center;
   margin-top: 20px;
@@ -361,10 +371,18 @@ span.text-red {
   align-items: center;
   gap: 10px;
   justify-content: center;
-
 }
 
-.footer-container .icons {
+.footer-container {
+  text-align: center;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.right .icons {
   font-size: 30px;
   display: flex;
   gap: 10px;
@@ -658,6 +676,36 @@ span.text-red {
   transform: scale(1.1, 1.1)
 }
 
+.gender-filter {
+  display: flex;
+  padding: 6px;
+  justify-content: center;
+  font-weight: 250;
+  margin-top: 20px;
+}
+
+.gender-filter span {
+  font-size: 16px;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 15px;
+  transition: background-color 0.3s ease;
+}
+
+/* .gender-filter span:last-child {
+  border-right: none;
+  border-radius: 15px;
+}
+
+.gender-filter span:first-child {
+  border-right: none;
+  border-radius: 15px;
+} */
+
+.gender-filter span.selected {
+  background-color: #dcdcdc; /* Add your desired background color here */
+}
+
 .quantity-desc {
   border: 1px solid gray;
   padding: 6px;
@@ -770,6 +818,20 @@ span.text-red {
   margin-top: 10px;
 }
 
+.contact-us-items {
+  display: flex;
+  align-items: center;
+}
+
+.contact-us-icons {
+  font-size: 15px;
+}
+
+.contact-us-text {
+  margin-left: 5px;
+  font-weight: 100;
+}
+
 @media screen and (max-width:800px) {
   .hero-banner-container {
     height: 560px;
@@ -785,7 +847,6 @@ span.text-red {
   }
 
   .footer-banner-container {
-    height: 560px;
     margin-top: 80px;
     z-index: -2;
   }
@@ -805,15 +866,15 @@ span.text-red {
   }
 
   .banner-desc .left p {
-    margin: 18px;
+    font-size: 18px;
   }
 
-  .banner-desc .right h3 {
-    font-size: 45px;
+  .banner-desc .right img {
+    max-width: 300px;
   }
 
   .banner-desc .right p {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .banner-desc .right .company-desc {
@@ -823,6 +884,7 @@ span.text-red {
   .banner-desc {
     flex-wrap: wrap;
     gap: 20px;
+    flex-direction: column;
   }
 
   .hero-banner-container {
@@ -956,5 +1018,13 @@ span.text-red {
   .btn-container {
     width: 300px;
     margin: auto;
+  }
+
+  .footer-container {
+    align-items: baseline;
+  }
+
+  .right .icons  {
+    font-size: 25px;
   }
 }

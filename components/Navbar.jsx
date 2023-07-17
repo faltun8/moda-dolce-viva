@@ -23,7 +23,14 @@ const Navbar = () => {
     return (
         <div className="navbar-container">
             <p className="logo">
-                <Link href="/">Moda Dolce Viva</Link>
+            <Link href="/">Moda Dolce Viva</Link>
+                {/* <Link href="/">
+                    <img
+                        src="/logo.jpg"
+                        width={100}
+                        height={100}
+                    />
+                </Link> */}
             </p>
 
             <div className='nav-right-container'>

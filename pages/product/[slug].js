@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
+import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 
 import { client, urlFor } from '../../lib/client';
 import { Product } from '../../components';
@@ -10,7 +11,7 @@ import en from '../../locales/en';
 import pl from '../../locales/pl';
 
 const ProductDetails = ({ product, products }) => {
-  const { image, name, details, price, discount } = product;
+  const { image, name, details, price, discount, rewiewCount, ratingStar } = product;
   const [index, setIndex] = useState(0);
   const { decQty, incQty, qty, setQty, onAdd, setShowCart } = useStateContext();
   const [selectedSize, setSelectedSize] = useState('');
@@ -59,14 +60,17 @@ const ProductDetails = ({ product, products }) => {
           <h1>{name}</h1>
           <div className="reviews">
             <div>
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiOutlineStar />
+              {
+                Array.from({ length:ratingStar  / 2 }, (_, index) => index).map((index) => (
+                  <BsStarFill />
+                ))}
+              {(ratingStar % 2 == 1) && <BsStarHalf />}
+              {Array.from({ length: (10 - ratingStar) / 2 }, (_, index) => index).map((index) => (
+                <BsStar key={index + 4} />
+              ))}
             </div>
             <p>
-              (20)
+              ({rewiewCount})
             </p>
           </div>
           <h4>{t.slugDetailsTitle} : </h4>

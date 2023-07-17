@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
 
@@ -13,18 +13,60 @@ const Home = ({ products, bannerData }) => {
   const { locale } = router;
   const t = locale === 'en' ? en : pl;
 
+  const [selectedFilter, setSelectedFilter] = useState('all');
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  
+  const handleFilterClick = (filter) => {
+    console.log('products :', products.filter(pro => pro.filters.gender == filter));
+    setSelectedFilter(filter);
+    setFilteredProducts(products.filter((product) => {
+      if (filter !== "all") {
+        return product.filters?.gender === filter || product.filters?.gender === "unisex";
+      } else {
+        return product;
+      }
+    }));
+    console.log('filteredProducts :', filteredProducts);
+  };
+
   return (
     <div>
       <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
-      
+
+      <div className="gender-filter">
+        <span
+          className={selectedFilter === 'all' ? 'selected' : ''}
+          onClick={() => handleFilterClick('all')}
+        >
+          All Products
+        </span>
+        <span
+          className={selectedFilter === 'male' ? 'selected' : ''}
+          onClick={() => handleFilterClick('male')}
+        >
+          Male
+        </span>
+        <span
+          className={selectedFilter === 'female' ? 'selected' : ''}
+          onClick={() => handleFilterClick('female')}
+        >
+          Female
+        </span>
+        {/* <span
+          className={selectedFilter === 'unisex' ? 'selected' : ''}
+          onClick={() => handleFilterClick('unisex')}
+        >
+          Unisex
+        </span> */}
+      </div>
+
       {/* Highlighted products */}
       <div className="products-heading">
         <h2>{t.heroTitle}</h2>
         <p>{t.heroDesc}</p>
       </div>
       <div className="products-container">
-        {console.log('products :', products)}
-        {products
+        {filteredProducts
           ?.filter((product) => product.isHighlighted === true)
           .map((product) => (
             <Product
@@ -41,7 +83,7 @@ const Home = ({ products, bannerData }) => {
         <p>{t.allProductDesc}</p>
       </div>
       <div className="products-container">
-      {products
+        {filteredProducts
           ?.filter((product) => product.isHighlighted === false)
           .map((product) => (
             <Product

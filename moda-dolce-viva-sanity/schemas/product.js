@@ -53,6 +53,19 @@ export default {
       initialValue: false,
     },
     {
+      title: "Rating Star",
+      name: "ratingStar",
+      type: "number",
+      validation: Rule => Rule.required().min(0).max(10),
+      initialValue: 10,
+    },
+    {
+      title: "Review Count",
+      name: "rewiewCount",
+      type: "number",
+      validation: Rule => Rule.required().min(0),
+    },
+    {
       title: "Stock info",
       name: "stockInfo",
       type: "document",
@@ -84,6 +97,26 @@ export default {
           type: "number",
           validation: Rule => Rule.required().min(0).max(100),
           initialValue: 0,
+        },
+      ]
+    },
+    {
+      title: "Filters",
+      name: "filters",
+      type: "document",
+      fields: [
+        {
+          title: "Gender",
+          name: "gender",
+          type: "string",
+          validation: Rule => Rule.required(),
+          options: {
+            list: [
+              { title: 'Male', value: 'male' },
+              { title: 'Female', value: 'female' },
+              { title: 'Unisex', value: 'unisex' },
+            ],
+          },
         },
       ]
     }

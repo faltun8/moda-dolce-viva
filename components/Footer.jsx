@@ -11,14 +11,8 @@ const Footer = () => {
   const t = locale === 'en' ? en : pl;
 
   return (
-    <div className="footer-container">
+    <div className="rights-container">
       <p>{t.rights}</p>
-      <p className="icons">
-        <a href='https://www.instagram.com/modadolceviva/' target="_blank">
-          <AiFillInstagram />
-        </a>
-        <AiOutlineTwitter />
-      </p>
     </div>
   )
 }
