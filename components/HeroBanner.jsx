@@ -14,7 +14,7 @@ const HeroBanner = ({ heroBanner }) => {
   const t = locale === 'en' ? en : pl;
   return (
     <div className="hero-banner-container">
-      <div>
+      <div className="hero-banner-container-texts">
         <p className="beats-solo">{heroBanner.smallText}</p>
         <h3>{heroBanner.midText}</h3>
         <h1>{heroBanner.largeText1}</h1>
@@ -22,7 +22,9 @@ const HeroBanner = ({ heroBanner }) => {
 
         <div>
           <Link href={`/product/${heroBanner.product}`}>
-            <button type="button">{heroBanner.buttonText}</button>
+            {/* uncomment if you wanna use as a button from sanity banner */}
+            {/* <button type="button">{heroBanner.buttonText}</button> */}
+            <button type="button">50% OFF</button>
           </Link>
           <div className="desc">
             <h5>{t.description}</h5>
