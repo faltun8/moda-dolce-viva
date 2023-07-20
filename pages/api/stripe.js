@@ -9,16 +9,16 @@ export default async function handler(req, res) {
         submit_type: 'pay',
         mode: 'payment',
         allow_promotion_codes: true,
-        payment_method_types: ['card', 'blik', 'p24'],
+        payment_method_types: ['card', 'blik', 'p24', 'paypal'],
         shipping_address_collection: {
           allowed_countries: ["US", "CA", "KE", "PL"],
         },
         billing_address_collection: 'auto',
         shipping_options: [
           //fast shipping
-          { shipping_rate: 'shr_1N8zo2BlsnK2mHDJZl7MKJeM' },
+          { shipping_rate: 'shr_1NVmxlJMV9Ri69E2WakR6ELn' },
           //standart shipping
-          { shipping_rate: 'shr_1N8zlcBlsnK2mHDJmu3cgESs' },
+          { shipping_rate: 'shr_1NVmyGJMV9Ri69E2M9kK6Ltz' },
         ],
         line_items: req.body.map((item) => {
           const img = item.image[0].asset._ref;
