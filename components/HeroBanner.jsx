@@ -21,11 +21,11 @@ const HeroBanner = ({ heroBanner }) => {
         <img src={urlFor(heroBanner.image)} alt="headphones" className="hero-banner-image" />
 
         <div>
-          <Link href={`/product/${heroBanner.product}`}>
+          {/* <Link href='#scrollToSection'> */}
             {/* uncomment if you wanna use as a button from sanity banner */}
             {/* <button type="button">{heroBanner.buttonText}</button> */}
-            <button type="button">50% OFF</button>
-          </Link>
+            {/* <button type="button">Start Shopping</button> */}
+          {/* </Link> */}
           <div className="desc">
             <h5>{t.description}</h5>
             <p>{heroBanner.desc}</p>

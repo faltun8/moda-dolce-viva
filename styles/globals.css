@@ -175,8 +175,9 @@ span.text-red {
   border-radius: 15px;
   position: relative;
   line-height: 0.9;
+  min-height: 505px;
   width: 100%;
-
+  overflow: hidden;
 }
 
 .hero-banner-container .beats-solo {
@@ -237,7 +238,7 @@ span.text-red {
 
 .desc h5 {
   margin-bottom: 12px;
-  font-weight: 700;
+  font-weight: 300;
   font-size: 16px;
   /* color: black; */
   align-self: flex-end;
@@ -833,7 +834,6 @@ span.text-red {
 
 @media screen and (max-width:800px) {
   .hero-banner-container {
-    z-index: -2;
     padding: 50px 40px;
   }
 
@@ -842,17 +842,15 @@ span.text-red {
   }
 
   .hero-banner-image {
-    width: 211px;
+    width: 290px;
     height: 75%;
     top: 25%;
-    right: -12px;
+    right: -56px;
     object-fit: cover;
-    z-index: -1;
   }
 
   .footer-banner-container {
     margin-top: 80px;
-    z-index: -2;
   }
 
   .footer-banner-image {
@@ -906,11 +904,10 @@ span.text-red {
 
   .hero-banner-container button {
     margin-bottom: 50px;
-    z-index: 10000;
   }
 
   .desc {
-    width: 100px;
+    width: 110px;
     right: auto;
   }
 
@@ -1032,5 +1029,9 @@ span.text-red {
 
   .right .icons  {
     font-size: 25px;
+  }
+
+  .contact-us-text {
+    font-size: 15px;
   }
 }

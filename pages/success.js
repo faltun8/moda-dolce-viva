@@ -38,8 +38,8 @@ const Success = () => {
         <p className="email-msg">{t.checkEmail}</p>
         <p className="description">
           {t.anyQuestion}
-          <a className="email" href="mailto:order@example.com">
-            order@example.com
+          <a className="email" href="mailto:info@modadolceviva.pl">
+          info@modadolceviva.pl
           </a>
         </p>
         <Link href="/">

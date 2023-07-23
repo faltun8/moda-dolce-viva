@@ -61,7 +61,7 @@ const Home = ({ products, bannerData }) => {
       </div>
 
       {/* Highlighted products */}
-      <div className="products-heading">
+      <div className="products-heading" id="scrollToSection">
         <h2>{t.heroTitle}</h2>
         <p>{t.heroDesc}</p>
       </div>

@@ -17,10 +17,13 @@ export default {
     checkout: 'Checkout',
     item: 'item',
     items: 'items',
-    description: 'Description',
+    description: 'Find Your Own',
     thankYou: 'Thank you for your order!',
     checkEmail: 'Check your email inbox for the receipt.',
     anyQuestion: 'If you have any questions, please email',
     continueShopping: 'Continue Shopping',
-    selectSize: 'Select Size'
+    selectSize: 'Select Size',
+    payMethods: 'PAYMENT METHODS',
+    contactUs: 'CONTACT US',
+    joinUs: 'JOIN US',
 };
