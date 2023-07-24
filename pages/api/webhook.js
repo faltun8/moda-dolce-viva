@@ -25,11 +25,24 @@ const webhookHandler = async (req, res) => {
     const eventType = payload.type;
 
     if (eventType === 'checkout.session.completed') {
+        const sessionID = payload.data.object.id;
+    
+        // Check if the session ID has been processed before
+        if (processedSessions[sessionID]) {
+          console.log('Duplicate event, skipping email notification.');
+          return res.status(200).json({ received: true });
+        }
+    
+        // Extract relevant information from the event
         const customerEmail = payload.data.object.customer_details.email;
-        const customerName = payload.data.object.customer_details.name; 
-
+        const customerName = payload.data.object.customer_details.name;
+    
+        // Send an email to the customer
         await sendEmailToCustomer(customerEmail, customerName);
-    }
+    
+        // Mark the session ID as processed to prevent duplicate emails
+        processedSessions[sessionID] = true;
+      }
 
     res.status(200).json({ received: true });
 };

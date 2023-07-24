@@ -17,7 +17,6 @@ const Home = ({ products, bannerData }) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
   
   const handleFilterClick = (filter) => {
-    console.log('products :', products.filter(pro => pro.filters.gender == filter));
     setSelectedFilter(filter);
     setFilteredProducts(products.filter((product) => {
       if (filter !== "all") {
@@ -26,7 +25,6 @@ const Home = ({ products, bannerData }) => {
         return product;
       }
     }));
-    console.log('filteredProducts :', filteredProducts);
   };
 
   return (
