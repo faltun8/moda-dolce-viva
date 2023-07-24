@@ -207,6 +207,8 @@ span.text-red {
   font-size: 10em;
   margin-left: -20px;
   text-transform: uppercase;
+  position: absolute;
+  z-index: 1;
 }
 
 .hero-banner-image {
