@@ -26,9 +26,9 @@ export default async function handler(req, res) {
           //TEST
 
           //fast shipping
-          { shipping_rate: 'shr_1NVmxlJMV9Ri69E2WakR6ELn' },
+          { shipping_rate: 'shr_1NZVAwJMV9Ri69E2sHFl2cpL' },
           //standart shipping
-          { shipping_rate: 'shr_1NVmyGJMV9Ri69E2M9kK6Ltz' },
+          { shipping_rate: 'shr_1NZVAeJMV9Ri69E2hLGlS95I' },
         ],
         line_items: req.body.map((item) => {
           const img = item.image[0].asset._ref;
