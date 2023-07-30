@@ -18,17 +18,17 @@ export default async function handler(req, res) {
 
           //PRODUCTION
 
-          //fast shipping
-          // { shipping_rate: 'shr_1NW5x4JMV9Ri69E2ztXatvqe' },
-          //standart shipping
-          // { shipping_rate: 'shr_1NW5wNJMV9Ri69E2FdSwMgs6' },
+          // fast shipping
+          { shipping_rate: 'shr_1NZbPBJMV9Ri69E2UUFRuCk6' },
+          // standart shipping
+          { shipping_rate: 'shr_1NZbOzJMV9Ri69E2QUIUYbrO' },
 
           //TEST
 
           //fast shipping
-          { shipping_rate: 'shr_1NZVAwJMV9Ri69E2sHFl2cpL' },
+          // { shipping_rate: 'shr_1NZVAwJMV9Ri69E2sHFl2cpL' },
           //standart shipping
-          { shipping_rate: 'shr_1NZVAeJMV9Ri69E2hLGlS95I' },
+          // { shipping_rate: 'shr_1NZVAeJMV9Ri69E2hLGlS95I' },
         ],
         line_items: req.body.map((item) => {
           const img = item.image[0].asset._ref;
