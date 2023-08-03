@@ -8,7 +8,7 @@ export default {
     addCart: 'Dodaj do koszyka',
     buyNow: 'Kup Teraz',
     slugDetailsTitle: 'Detale',
-    mayLike: 'Może Ci się spodobać',
+    mayLike: 'Może Ci Się Spodobać',
     yourCart: 'Twój wózek',
     emptycart: 'Twoja torba na zakupy jest pusta',
     continueShopping: 'Kontynuować zakupy',
