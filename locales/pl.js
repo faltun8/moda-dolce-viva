@@ -3,7 +3,7 @@ export default {
     heroDesc: 'Tutaj możesz znaleźć najlepiej sprzedające się produkty',
     allProductTitle: 'Wszystkie produkty',
     allProductDesc: 'Tutaj znajdziesz inne nasze produkty',
-    rights: '2023 Dolce Viva Moda Wszelkie prawa zastrzeżone',
+    rights: '2023 Dolce Viva Moda Wszelkie Prawa Zastrzeżone',
     quantity: 'Ilość',
     addCart: 'Dodaj do koszyka',
     buyNow: 'Kup Teraz',

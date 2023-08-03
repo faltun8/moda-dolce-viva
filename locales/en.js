@@ -3,7 +3,7 @@ export default {
     heroDesc: 'Here you can find our best selling products',
     allProductTitle: 'All Products',
     allProductDesc: 'Here you can find our other products',
-    rights: '2023 Dolce Viva Moda All rights reserved',
+    rights: '2023 Dolce Viva Moda All Rights Reserved',
     quantity: 'Quantity',
     addCart: 'Add to Cart',
     buyNow: 'Buy Now',
