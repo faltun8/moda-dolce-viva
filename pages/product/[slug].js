@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+import { FaSearch } from 'react-icons/fa';
 import ImageModal from '../../components/ImageModal';
 
 import { client, urlFor } from '../../lib/client';
@@ -20,7 +21,6 @@ const ProductDetails = ({ product, products }) => {
   const [indexForImage, setIndexForImage] = useState(null);
 
   const handleImageClick = (i) => {
-  console.log('image click :', i);
     setIndexForImage(i);
   };
 
@@ -56,6 +56,9 @@ const ProductDetails = ({ product, products }) => {
             {/* Display the main image */}
             <div className="image-container">
               <img src={urlFor(image && image[index])} className="product-detail-image" onClick={() => handleImageClick(index)} />
+              <div onClick={() => handleImageClick(index)} className="magnifying-glass">
+                <FaSearch />
+              </div>
             </div>
 
             {/* Display the modal if index is not null */}
