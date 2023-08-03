@@ -44,15 +44,17 @@ const ProductDetails = ({ product, products }) => {
           <div className="image-container">
             <img src={urlFor(image && image[index])} className="product-detail-image" />
           </div>
-          <div className="small-images-container">
-            {image?.map((item, i) => (
-              <img
-                key={i}
-                src={urlFor(item)}
-                className={i === index ? 'small-image selected-image' : 'small-image'}
-                onMouseEnter={() => setIndex(i)}
-              />
-            ))}
+          <div className="small-images-scroll-container">
+            <div className="small-images-container">
+              {image?.map((item, i) => (
+                <img
+                  key={i}
+                  src={urlFor(item)}
+                  className={i === index ? 'small-image selected-image' : 'small-image'}
+                  onMouseEnter={() => setIndex(i)}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -61,7 +63,7 @@ const ProductDetails = ({ product, products }) => {
           <div className="reviews">
             <div>
               {
-                Array.from({ length:ratingStar  / 2 }, (_, index) => index).map((index) => (
+                Array.from({ length: ratingStar / 2 }, (_, index) => index).map((index) => (
                   <BsStarFill />
                 ))}
               {(ratingStar % 2 == 1) && <BsStarHalf />}

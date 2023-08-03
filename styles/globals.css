@@ -557,6 +557,8 @@ span.text-red {
   display: flex;
   gap: 10px;
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .small-image {
@@ -566,6 +568,12 @@ span.text-red {
   height: 70px;
   cursor: pointer;
   object-fit: cover;
+}
+
+.small-images-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  width: 400px;
 }
 
 .selected-image {
@@ -1035,5 +1043,13 @@ span.text-red {
 
   .contact-us-text {
     font-size: 15px;
+  }
+
+  .small-images-scroll-container {
+    width: 350px;
+  }
+
+  .small-images-container {
+    flex-wrap: nowrap;
   }
 }
