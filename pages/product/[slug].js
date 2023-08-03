@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+import ImageModal from '../../components/ImageModal';
 
 import { client, urlFor } from '../../lib/client';
 import { Product } from '../../components';
@@ -16,6 +17,16 @@ const ProductDetails = ({ product, products }) => {
   const { decQty, incQty, qty, setQty, onAdd, setShowCart } = useStateContext();
   const [selectedSize, setSelectedSize] = useState('');
   const [availableOptions, setAvailableOptions] = useState({});
+  const [indexForImage, setIndexForImage] = useState(null);
+
+  const handleImageClick = (i) => {
+  console.log('image click :', i);
+    setIndexForImage(i);
+  };
+
+  const handleCloseModal = () => {
+    setIndexForImage(null);
+  };
 
   const handleSizeChange = (event) => {
     setSelectedSize(event.target.value);
@@ -41,8 +52,16 @@ const ProductDetails = ({ product, products }) => {
     <div>
       <div className="product-detail-container">
         <div>
-          <div className="image-container">
-            <img src={urlFor(image && image[index])} className="product-detail-image" />
+          <div>
+            {/* Display the main image */}
+            <div className="image-container">
+              <img src={urlFor(image && image[index])} className="product-detail-image" onClick={() => handleImageClick(index)} />
+            </div>
+
+            {/* Display the modal if index is not null */}
+            {indexForImage !== null && (
+              <ImageModal imageUrl={urlFor(image && image[indexForImage])} onClose={handleCloseModal} />
+            )}
           </div>
           <div className="small-images-scroll-container">
             <div className="small-images-container">
