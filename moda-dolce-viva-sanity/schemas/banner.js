@@ -12,6 +12,14 @@ export default {
             },
         },
         {
+            name: 'image_mobile',
+            title: 'Image Mobile',
+            type: 'image',
+            options: {
+                hotspot: true,
+            },
+        },
+        {
             name: 'buttonText',
             title: 'ButtonText',
             type: 'string',
