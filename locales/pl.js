@@ -7,7 +7,7 @@ export default {
     quantity: 'Ilość',
     addCart: 'Dodaj do koszyka',
     buyNow: 'Kup Teraz',
-    slugDetailsTitle: 'Detale',
+    slugDetailsTitle: 'Opis produktu',
     mayLike: 'Może Ci Się Spodobać',
     yourCart: 'Twój wózek',
     emptycart: 'Twoja torba na zakupy jest pusta',

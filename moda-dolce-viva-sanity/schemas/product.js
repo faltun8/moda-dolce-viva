@@ -71,6 +71,13 @@ export default {
       type: "document",
       fields: [
         {
+          title: "Universal",
+          name: "Universal",
+          type: "number",
+          validation: Rule => Rule.required().min(0).max(100),
+          initialValue: 0,
+        },
+        {
           title: "S",
           name: "S",
           type: "number",
@@ -94,6 +101,41 @@ export default {
         {
           title: "XL",
           name: "XL",
+          type: "number",
+          validation: Rule => Rule.required().min(0).max(100),
+          initialValue: 0,
+        },
+        {
+          title: "S-M",
+          name: "S_M",
+          type: "number",
+          validation: Rule => Rule.required().min(0).max(100),
+          initialValue: 0,
+        },
+        {
+          title: "L-XL",
+          name: "L_XL",
+          type: "number",
+          validation: Rule => Rule.required().min(0).max(100),
+          initialValue: 0,
+        },
+        {
+          title: "2XL",
+          name: "XXL",
+          type: "number",
+          validation: Rule => Rule.required().min(0).max(100),
+          initialValue: 0,
+        },
+        {
+          title: "2XL-3XL",
+          name: "XXL_3XL",
+          type: "number",
+          validation: Rule => Rule.required().min(0).max(100),
+          initialValue: 0,
+        },
+        {
+          title: "3XL",
+          name: "XXXL",
           type: "number",
           validation: Rule => Rule.required().min(0).max(100),
           initialValue: 0,

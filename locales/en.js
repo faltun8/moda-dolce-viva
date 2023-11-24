@@ -7,7 +7,7 @@ export default {
     quantity: 'Quantity',
     addCart: 'Add to Cart',
     buyNow: 'Buy Now',
-    slugDetailsTitle: 'Detils',
+    slugDetailsTitle: 'Product Description',
     mayLike: 'You May Also Like',
     yourCart: 'Your Cart',
     emptycart: 'Your shopping bag is empty',

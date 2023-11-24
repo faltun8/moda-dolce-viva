@@ -46,6 +46,7 @@ const ProductDetails = ({ product, products }) => {
   useEffect(() => {
     setQty(1)
     setAvailableOptions(product.stockInfo);
+    console.log('product.stockInfo :', product.stockInfo);
   }, []);
 
   return (
@@ -117,10 +118,16 @@ const ProductDetails = ({ product, products }) => {
             <h3>{t.selectSize} :</h3>
             <select className="quantity-desc" id="size" value={selectedSize} onChange={handleSizeChange}>
               <option value="" disabled>{t.selectSize}</option>
+              <option value="Universal" disabled={!availableOptions['Universal'] || availableOptions['Universal'] < qty}>Universal</option>
               <option value="S" disabled={!availableOptions['S'] || availableOptions['S'] < qty}>S</option>
               <option value="M" disabled={!availableOptions['M'] || availableOptions['M'] < qty}>M</option>
               <option value="L" disabled={!availableOptions['L'] || availableOptions['L'] < qty}>L</option>
               <option value="XL" disabled={!availableOptions['XL'] || availableOptions['XL'] < qty}>XL</option>
+              <option value="S-M" disabled={!availableOptions['S_M'] || availableOptions['S_M'] < qty}>S-M</option>
+              <option value="L-XL" disabled={!availableOptions['L_XL'] || availableOptions['L_XL'] < qty}>L-XL</option>
+              <option value="2XL" disabled={!availableOptions['XXL'] || availableOptions['XXL'] < qty}>2XL</option>
+              <option value="2XL-3XL" disabled={!availableOptions['XXL_3XL'] || availableOptions['XXL_3XL'] < qty}>2XL-3XL</option>
+              <option value="3XL" disabled={!availableOptions['XXXL'] || availableOptions['XXXL'] < qty}>3XL</option>
             </select>
           </div>
 
